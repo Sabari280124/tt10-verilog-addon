@@ -145,62 +145,28 @@ The main advantage of the CLA is its speed. By computing carries in parallel rat
 
 
 ## How to test
-
-
-For a 2-bit CLA as an example:
-
-Inputs: 
+To test an 8-bit Carry Lookahead Adder (CLA), you need to verify its functionality by applying representative test cases. Start with key input patterns such as all zeros, all ones, alternating bits (e.g., 
 𝐴
 =
-𝐴
-1
-𝐴
-0
-, 
+10101010
+,
 𝐵
 =
-𝐵
-1
-𝐵
-0
-, 
-𝐶
-0
-
-Outputs: 
-𝑆
+01010101
+), and edge cases like maximum carry propagation (e.g., 
+𝐴
 =
-𝑆
-1
-𝑆
-0
-, 
-𝐶
-2
- (final carry-out)
-
-𝐴
-1
-𝐴
-0
+11111111
+,
 𝐵
-1
-𝐵
-0
+=
+00000001
+,
 𝐶
 0
-𝑆
+=
 1
-𝑆
-0
- (Sum)	
-𝐶
-2
- (Carry Out)
-00	00	0	00	0
-00	00	1	01	0
-01	10	0	11	0
-...	...	...	...
+). Use a simulation tool like Verilog or VHDL to create a testbench that automates input application and compares the adder's outputs (sum and carry-out) with expected results. For hardware, inputs can be applied via switches, with outputs observed on LEDs or logic analyzers to ensure correctness and performance.
 ## External hardware
 no
 
