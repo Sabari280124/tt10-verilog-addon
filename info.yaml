@@ -1,9 +1,9 @@
 # Tiny Tapeout project information
 project:
-  title:        "half adder demo"      # Project title
+  title:        "carry lookahead adder demo"      # Project title
   author:       "Sabariath"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  "performs half addition"      # One line description of what your project does
+  description:  "performs parallel carry computation "    # One line description of what your project does
   language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
   clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
 
@@ -43,7 +43,7 @@ pinout:
   uo[7]: ""
 
   # Bidirectional pins
-  uio[0]: ""
+  uio[0]: "Cin"
   uio[1]: ""
   uio[2]: ""
   uio[3]: ""
