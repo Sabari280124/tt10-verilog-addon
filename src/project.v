@@ -17,8 +17,8 @@ module tt_um_cla (
 );
 
     // Internal signals for CLA
-    wire [7:0] A = ui_in;       // First input operand
-    wire [7:0] B = uio_in[7:0]; // Second input operand
+    wire [7:0] A = ui_in[0];       // First input operand
+    wire [7:0] B = ui_in[1]; // Second input operand
     wire Cin = uio_in[0];       // Carry-in (using least significant bit of `uio_in`)
     wire [7:0] Sum;             // Sum output
     wire Cout;                  // Carry-out
