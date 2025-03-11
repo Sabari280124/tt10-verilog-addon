@@ -5,7 +5,7 @@
 
 `default_nettype none
 
-module tt_um_cla_8bit (
+module tt_um_cla (
     input  wire [7:0] ui_in,    // Dedicated inputs (used for A and B)
     output wire [7:0] uo_out,   // Dedicated outputs (used for Sum)
     input  wire [7:0] uio_in,   // IOs: Input path (used for Cin)
