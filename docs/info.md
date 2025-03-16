@@ -145,7 +145,7 @@ The main advantage of the CLA is its speed. By computing carries in parallel rat
 
 
 ## How to test
-To test an 8-bit Carry Lookahead Adder (CLA), you need to verify its functionality by applying representative test cases. Start with key input patterns such as all zeros, all ones, alternating bits (e.g., 
+To test an 4-bit Carry Lookahead Adder (CLA), you need to verify its functionality by applying representative test cases. Start with key input patterns such as all zeros, all ones, alternating bits (e.g., 
 𝐴
 =
 10101010
