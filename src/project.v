@@ -2,27 +2,26 @@
  * Copyright (c) 2024 Your Name
  * SPDX-License-Identifier: Apache-2.0
  */
-
 `default_nettype none
 
 module tt_um_cla (
-    input  wire [7:0] ui_in,    // Dedicated inputs (expanded to 8 bits for A and B)
-    output wire [3:0] uo_out,   // Dedicated outputs (used for Sum)
-    input  wire       uio_in,   // IOs: Input path (used for Cin)
-    output wire       uio_out,  // IOs: Output path (unused)
-    output wire       uio_oe,   // IOs: Enable path (unused)
+    input  wire [7:0] ui_in,    // Expanded to 8 bits for A and B inputs
+    output wire [3:0] uo_out,   // Outputs for Sum
+    input  wire       uio_in,   // Input for Cin
+    output wire       uio_out,  // Unused output
+    output wire       uio_oe,   // Unused enable
     input  wire       ena,      // Always 1 when the design is powered
-    input  wire       clk,      // Clock (unused)
-    input  wire       rst_n     // Reset_n - low to reset (unused)
+    input  wire       clk,      // Unused clock
+    input  wire       rst_n     // Unused reset (active low)
 );
 
-    // Internal signals for CLA
-    wire [3:0] A = ui_in[3:0];  // First input operand (lower 4 bits of ui_in)
-    wire [3:0] B = ui_in[7:4];  // Second input operand (upper 4 bits of ui_in)
-    wire Cin = uio_in;          // Carry-in (single bit from uio_in)
+    // Internal signals
+    wire [3:0] A = ui_in[3:0];  // Lower 4 bits of ui_in for A
+    wire [3:0] B = ui_in[7:4];  // Upper 4 bits of ui_in for B
+    wire Cin = uio_in;          // Carry-in
     wire [3:0] Sum;             // Sum output
     wire Cout;                  // Carry-out
-    wire [3:0] P, G, C;
+    wire [3:0] P, G, C;         // Propagate, Generate, and Carry
 
     // Propagate and Generate logic
     assign P = A ^ B;           // Propagate
@@ -40,13 +39,14 @@ module tt_um_cla (
 
     // Map outputs
     assign uo_out = Sum;        // Map Sum to uo_out
-    assign uio_out = 1'b0;      // Unused
-    assign uio_oe = 1'b0;       // Unused
+    assign uio_out = 1'b0;      // Unused output
+    assign uio_oe = 1'b0;       // Unused enable
 
     // Prevent warnings for unused inputs
-    wire _unused = &{ena, clk, rst_n, 1'b0};
+    wire _unused = &{ena, clk, rst_n};
 
 endmodule
+
 
 
 
