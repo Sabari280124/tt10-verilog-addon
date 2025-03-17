@@ -6,10 +6,10 @@
 
 module tt_um_cla (
     input  wire [7:0] ui_in,    // Dedicated inputs for A and B
-    output wire [3:0] uo_out,   // Outputs for Sum
+    output wire [7:0] uo_out,   // Outputs for Sum (changed to 8 bits)
     input  wire [7:0] uio_in,    // Carry-in adjusted to 8 bits
-    output wire [7:0] uio_out,   // Unused output (changed to 8 bits)
-    output wire [7:0] uio_oe,    // Unused enable (changed to 8 bits)
+    output wire [7:0] uio_out,   // Unused output (8 bits)
+    output wire [7:0] uio_oe,    // Unused enable (8 bits)
     input  wire       ena,      // Always 1 when the design is powered
     input  wire       clk,      // Unused clock
     input  wire       rst_n     // Unused reset (active low)
@@ -38,9 +38,9 @@ module tt_um_cla (
     assign Sum = P ^ C;
 
     // Map outputs
-    assign uo_out = Sum;        // Map Sum to uo_out
-    assign uio_out = 8'b0;      // Unused output (set to 8 bits)
-    assign uio_oe = 8'b0;       // Unused enable (set to 8 bits)
+    assign uo_out = {4'b0, Sum}; // Map Sum to the upper 4 bits of uo_out (8 bits total)
+    assign uio_out = 8'b0;       // Unused output (set to 8 bits)
+    assign uio_oe = 8'b0;        // Unused enable (set to 8 bits)
 
     // Prevent warnings for unused inputs
     wire _unused = &{ena, clk, rst_n};
