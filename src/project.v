@@ -2,12 +2,18 @@
  * Copyright (c) 2024 Your Name
  * SPDX-License-Identifier: Apache-2.0
  */
+`
+
+
+
+
+
 `default_nettype none
 
 module tt_um_cla (
-    input  wire [7:0] ui_in,    // Expanded to 8 bits for A and B inputs
+    input  wire [7:0] ui_in,    // Dedicated inputs for A and B
     output wire [3:0] uo_out,   // Outputs for Sum
-    input  wire       uio_in,   // Input for Cin
+    input  wire [7:0] uio_in,   // Carry-in adjusted to 8 bits
     output wire       uio_out,  // Unused output
     output wire       uio_oe,   // Unused enable
     input  wire       ena,      // Always 1 when the design is powered
@@ -15,10 +21,10 @@ module tt_um_cla (
     input  wire       rst_n     // Unused reset (active low)
 );
 
-    // Internal signals
+    // Internal signals for CLA
     wire [3:0] A = ui_in[3:0];  // Lower 4 bits of ui_in for A
     wire [3:0] B = ui_in[7:4];  // Upper 4 bits of ui_in for B
-    wire Cin = uio_in;          // Carry-in
+    wire Cin = uio_in[0];       // Carry-in (only the lowest bit of uio_in is used)
     wire [3:0] Sum;             // Sum output
     wire Cout;                  // Carry-out
     wire [3:0] P, G, C;         // Propagate, Generate, and Carry
@@ -43,13 +49,6 @@ module tt_um_cla (
     assign uio_oe = 1'b0;       // Unused enable
 
     // Prevent warnings for unused inputs
-    // Mark 'clk' and 'rst_n' as unused explicitly
-    // If unused in your design, these inputs can be removed
-    wire _unused_clk_rst = &{clk, rst_n};
+    wire _unused = &{ena, clk, rst_n};
 
 endmodule
-
-
-
-
-
