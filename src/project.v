@@ -2,7 +2,6 @@
  * Copyright (c) 2024 Your Name
  * SPDX-License-Identifier: Apache-2.0
  */
-
 `default_nettype none
 
 module tt_um_cla (
@@ -37,3 +36,4 @@ module tt_um_cla (
     wire _unused = &{ena, clk, rst_n, 1'b0};
 
 endmodule
+
