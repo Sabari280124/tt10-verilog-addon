@@ -16,15 +16,15 @@ module tt_um_cla (
 );
 
     // Internal signals for CLA
-    wire A = ui_in[0];          // First input operand
-    wire B = ui_in[1];          // Second input operand
+    wire a = ui_in[0];          // First input operand
+    wire b = ui_in[1];          // Second input operand
     wire Cin = uio_in;          // Carry-in (single bit from uio_in)
     wire Sum;                   // Sum output
     wire Carry;                 // Carry-out
 
     // Logic for Carry Lookahead Adder
-    assign Sum = A ^ B ^ Cin;           // Compute Sum
-    assign Carry = (A & B) | (A & Cin) | (B & Cin); // Compute Carry-out
+    assign Sum = a ^ b ^ Cin;           // Compute Sum
+    assign Carry = (a & b) | (a & Cin) | (b & Cin); // Compute Carry-out
 
     // Map outputs to match the Tiny Tapeout pinout
     assign uo_out[0] = Sum;             // Map Sum to uo[0]
