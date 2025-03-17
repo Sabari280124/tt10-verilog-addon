@@ -2,38 +2,33 @@
  * Copyright (c) 2024 Your Name
  * SPDX-License-Identifier: Apache-2.0
  */
-`default_nettype none
+``default_nettype none
 
-module tt_um_cla (
-    input  wire [1:0] ui_in,    // Dedicated inputs for A and B
-    output wire [1:0] uo_out,   // Dedicated outputs for sum and carry
-    input  wire       uio_in,   // IOs: Input path for Cin
+module tt_um_cla_v2 (
+    input  wire [3:0] ui_in,    // Dedicated inputs (A and B packed together)
+    output wire [3:0] uo_out,   // Dedicated outputs (Sum)
+    input  wire       uio_in,   // IOs: Input path (used for Cin)
     output wire       uio_out,  // IOs: Output path (unused)
-    output wire       uio_oe,   // IOs: Enable path (unused)
+    output wire       uio_oe,   // IOs: Enable path (active high: 0=input, 1=output)
     input  wire       ena,      // Always 1 when the design is powered
     input  wire       clk,      // Clock (unused)
-    input  wire       rst_n     // Reset_n (unused)
+    input  wire       rst_n     // Reset_n - low to reset (unused)
 );
 
     // Internal signals for CLA
-    wire a = ui_in[0];          // First input operand
-    wire b = ui_in[1];          // Second input operand
-    wire Cin = uio_in;          // Carry-in (single bit from uio_in)
-    wire Sum;                   // Sum output
-    wire Carry;                 // Carry-out
+    wire [1:0] A = ui_in[1:0];  // Lower 2 bits of A
+    wire [1:0] B = ui_in[3:2];  // Upper 2 bits of B
+    wire Cin = uio_in;          // Carry-in (from uio_in)
+    wire [3:0] Sum;             // Sum output
+    wire Cout;                  // Carry-out
+    wire [3:0] P, G, C;
 
-    // Logic for Carry Lookahead Adder
-    assign Sum = a ^ b ^ Cin;           // Compute Sum
-    assign Carry = (a & b) | (a & Cin) | (b & Cin); // Compute Carry-out
+    // Generate and propagate
+    assign P = A ^ B;
+    assign G = A & B;
 
-    // Map outputs to match the Tiny Tapeout pinout
-    assign uo_out[0] = Sum;             // Map Sum to uo[0]
-    assign uo_out[1] = Carry;           // Map Carry to uo[1]
-    assign uio_out = 1'b0;              // Unused
-    assign uio_oe  = 1'b0;              // Unused
+    // Carry
+    assign C[0] Great clarify 
+    ```
 
-    // Prevent warnings for unused inputs
-    wire _unused = &{ena, clk, rst_n, 1'b0};
-
-endmodule
 
