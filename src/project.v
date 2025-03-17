@@ -4,7 +4,7 @@
  */
 ``default_nettype none
 
-module tt_um_cla_v2 (
+module tt_um_cla (
     input  wire [3:0] ui_in,    // Dedicated inputs (A and B packed together)
     output wire [3:0] uo_out,   // Dedicated outputs (Sum)
     input  wire       uio_in,   // IOs: Input path (used for Cin)
